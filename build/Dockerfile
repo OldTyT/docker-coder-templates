@@ -10,6 +10,7 @@ RUN apt-get update \
         nodejs \
         python3 \
         python3-pip \
+        nano \
 	&& rm -rf /var/lib/apt/lists/* \
     && wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz \
     && tar -C /usr/local -xzf go1.20.2.linux-amd64.tar.gz \
