@@ -122,9 +122,9 @@ resource "docker_container" "workspace" {
     host = "host.docker.internal"
     ip   = "host-gateway"
   }
-  networks_advanced {
-    name = "main_net"
-  }
+#  networks_advanced {
+#    name = "swarm_net"
+#  }
   volumes {
     container_path = "/home/${local.username}"
     volume_name    = docker_volume.home_volume.name
@@ -147,24 +147,24 @@ resource "docker_container" "workspace" {
     label = "coder.workspace_name"
     value = data.coder_workspace.me.name
   }
-  labels {
-    label = "traefik.enable"
-    value = "true"
-  }
-  labels {
-    label = "traefik.http.services.${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}.loadbalancer.server.port"
-    value = "3000"
-  }
-  labels {
-    label = "traefik.http.routers.${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}.rule"
-    value = "Host(`${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}-dev.oldtyt.xyz`)"
-  }
-  labels {
-    label = "traefik.http.routers.${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}.service"
-    value = "${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
-  }
-  labels {
-    label = "traefik.http.routers.${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}.entryPoints"
-    value = "http"
-  }
+#  labels {
+#    label = "traefik.enable"
+#    value = "true"
+#  }
+#  labels {
+#    label = "traefik.http.services.${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}.loadbalancer.server.port"
+#    value = "3000"
+#  }
+#  labels {
+#    label = "traefik.http.routers.${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}.rule"
+#    value = "Host(`${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}-dev.oldtyt.xyz`)"
+#  }
+#  labels {
+#    label = "traefik.http.routers.${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}.service"
+#    value = "${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
+#  }
+#  labels {
+#    label = "traefik.http.routers.${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}.entryPoints"
+#    value = "http"
+#  }
 }
